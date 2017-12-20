@@ -4,7 +4,6 @@
 
 \echo '---step1 清空与重建schema---'
 drop schema if exists data cascade;
-drop schema if exists extension cascade;
 create schema if not exists data authorization xjp;
 alter database pay set search_path to data;
 
