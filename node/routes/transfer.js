@@ -95,9 +95,11 @@ router.post('/', async (ctx, next) => {
         //                     .send(xml)
         request
             .post('https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfer')
-            .cert(fs.readFileSync(__dirname + '/../cert/' + app.cert_path + '.pem'))
-            .key(fs.readFileSync(__dirname + '/../cert/' + app.cert_path + '_key.pem'))
-            .set('Content-Type', 'application/xml')
+            .pfx({
+                pfx: pfx,
+                passphrase: Buffer.from(mch_id)
+            })
+            .charset('Content-Type', 'text/xml; charset=utf8')
             .send(xml).then(data =>{
                 console.log('data', data)
             }).then( err =>{
