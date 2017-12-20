@@ -93,11 +93,8 @@ router.post('/', async (ctx, next) => {
         //                     .send(xml)
         request
             .post('https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfer')
-            .pfx({
-                pfx,
-                passphrase: Buffer.from(mch_id)
-            })
             .set('Content-Type', 'application/xml')
+            .pfx(pfx)
             .send(xml).then((data, err) =>{
                 console.log('data', data)
                 console.log('err', err)
