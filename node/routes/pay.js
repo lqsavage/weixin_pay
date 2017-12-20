@@ -75,6 +75,7 @@ router.post('/', async (ctx, next) => {
             &key              = ${key}
             `.replace(/\n|\s/g, '')
         console.log('string', stringA)
+        
         let md5 = crypto.createHash('md5')
         md5.update(stringA)
         let sign = md5.digest('hex').toUpperCase()

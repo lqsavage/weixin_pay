@@ -1,4 +1,5 @@
 const router    = require('koa-router')()
+const knex      = require('../utils/knexfile')
 const request   = require('superagent')
 const crypto    = require('crypto')
 const xml2js    = require('xml2js')
@@ -68,7 +69,7 @@ router.post('/', async (ctx, next) => {
             &partner_trade_no = ${partner_trade_no}
             &spbill_create_ip = ${client_ip}
             &key              = ${key}
-        `
+        `.replace(/\n|\s/g, '')
         console.log('stringA', stringA)
 
         let md5 = crypto.createHash('md5')
