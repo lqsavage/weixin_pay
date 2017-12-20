@@ -74,7 +74,7 @@ router.post('/', async (ctx, next) => {
             &trade_type       = ${opt.trade_type}
             &key              = ${key}
             `
-
+        console.log('string', stringA)
         let md5 = crypto.createHash('md5')
         md5.update(stringA)
         let sign = md5.digest('hex').toUpperCase()
