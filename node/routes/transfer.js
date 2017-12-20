@@ -83,6 +83,7 @@ router.post('/', async (ctx, next) => {
         console.log('xml', xml)
 
         let pfx = fs.readFileSync(__dirname + '/../cert/' + app.cert_path + '.p12')
+        console.log('pfx', pfx)
         let res = await request
                             .post('https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfer') 
                             .pfx({
