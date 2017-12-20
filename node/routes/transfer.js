@@ -99,11 +99,11 @@ router.post('/', async (ctx, next) => {
                 pfx: pfx,
                 passphrase: Buffer.from(mch_id)
             })
-            .set('Content-Type', 'text/xml; charset=utf8')
-            .send(xml).then(data =>{
-                console.log('data', data)
-            }).then( err =>{
+            .set('Content-Type', 'application/xml')
+            .send(xml)
+            .end((err, data) =>{
                 console.log('err', err)
+                console.log('data', data)
             })
         // console.log('res', res.text) 
 
