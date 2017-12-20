@@ -1,10 +1,10 @@
 const router    = require('koa-router')()
-const knex      = require('../../utils/knexfile')
+const knex      = require('../utils/knexfile')
 const request   = require('superagent')
 const crypto    = require('crypto')
 const xml2js    = require('xml2js')
 const builder   = new xml2js.Builder({ rootName: 'xml' })
-const xmlParser = require('../../utils/xmlParser')
+const xmlParser = require('../utils/xmlParser')
 const payUrl    = require('../config/constant')
 
 router.post('/', async (ctx, next) => {

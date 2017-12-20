@@ -6,6 +6,7 @@ const bodyparser = require('koa-bodyparser')
 const logger     = require('koa-logger')
 const cors       = require('koa-cors')
 const xmlParser = require('koa-xml-body')
+const router = require('koa-router')()
 
 const notify     = require('./routes/notify')
 const pay        = require('./routes/pay')
