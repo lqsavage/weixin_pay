@@ -83,28 +83,38 @@ router.post('/', async (ctx, next) => {
         console.log('xml', xml)
 
         let pfx = fs.readFileSync(__dirname + '/../cert/' + app.cert_path + '.p12')
-        console.log('pfx', pfx)
-        let res = await request
-                            .post('https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfer') 
-                            .pfx({
-                                pfx,
-                                passphrase: Buffer.from(mch_id)
-                            })
-                            .set('Content-Type', 'application/xml')
-                            .send(xml)
-        console.log('res', res.text) 
+        // let res = await request
+        //                     .post('https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfer') 
+        //                     .pfx({
+        //                         pfx,
+        //                         passphrase: Buffer.from(mch_id)
+        //                     })
+        //                     .set('Content-Type', 'application/xml')
+        //                     .send(xml)
+        request
+            .post('https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfer')
+            .pfx({
+                pfx,
+                passphrase: Buffer.from(mch_id)
+            })
+            .set('Content-Type', 'application/xml')
+            .send(xml).then((data, err) =>{
+                console.log('data', data)
+                console.log('err', err)
+            })
+        // console.log('res', res.text) 
 
-        let result = await xmlParser(res.text)
-        console.log('result', result)
+        // let result = await xmlParser(res.text)
+        // console.log('result', result)
 
-        //返回
-        if (result.result_code[0] == 'SUCCESS') {
-            ctx.body = 'success'
-            await knex('transfer').update({ status: 'paid' }).where({ id: partner_trade_no})
-        }else{
-            ctx.body = result.return_msg[0]
-            await knex('transfer').update({ status: 'failed', failure_msg: result.return_msg[0] }).where({ id: partner_trade_no })
-        }
+        // //返回
+        // if (result.result_code[0] == 'SUCCESS') {
+        //     ctx.body = 'success'
+        //     await knex('transfer').update({ status: 'paid' }).where({ id: partner_trade_no})
+        // }else{
+        //     ctx.body = result.return_msg[0]
+        //     await knex('transfer').update({ status: 'failed', failure_msg: result.return_msg[0] }).where({ id: partner_trade_no })
+        // }
 
     } else ctx.body = '参数有误'
 })
