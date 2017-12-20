@@ -96,10 +96,8 @@ router.post('/', async (ctx, next) => {
         request
             .post('https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfer')
             .set('Content-Type', 'application/xml')
-            .pfx({
-                pfx: pfx,
-                passphrase: Buffer.from(mch_id)
-            })
+            .cert(fs.readFileSync(__dirname + '/../cert/' + app.cert_path + '.pem'))
+            .key(fs.readFileSync(__dirname + '/../cert/' + app.cert_path + '_key.pem'))
             .send(xml).then(data =>{
                 console.log('data', data)
             }).then( err =>{
