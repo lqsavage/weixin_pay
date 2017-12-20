@@ -18,13 +18,13 @@ sleep 1s
 #######################
 echo '>>> 更新db'
 #######################
-cd $HOME/code/util/pay/db
-psql -U xjp -d $sql -f 'up_db.sql'
+# cd $HOME/code/util/pay/db
+# psql -U xjp -d $sql -f 'up_db.sql'
 
 # 初次部署或改动postgrest.conf文件后在bash下手动执行:
 # postgrest postgrest.conf </dev/null >postgrest.log 2>&1 &
-sleep 2s
-kill -HUP $(lsof -i:$3030 -t)
+# sleep 2s
+# kill -HUP $(lsof -i:$3030 -t)
 
 
 #######################

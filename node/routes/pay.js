@@ -18,6 +18,7 @@ router.post('/', async (ctx, next) => {
 
     //查询app相关信息
     let app    = await knex('app').where({ id }).first()
+    console.log('app', app)
     let appid  = app.appid
     let key    = app.api_key
     let mch_id = app.mchid
