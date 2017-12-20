@@ -16,7 +16,7 @@ CREATE TABLE data.recharge (
     client_ip text,
     trade_type data.recharge_trade_type DEFAULT 'JSAPI',
     amount_refunded int,
-    status data.recharge_status NOT NULL DEFAULT 'pending',
+    status data.recharge_status DEFAULT 'pending',
     failure_msg text,
     paid_at timestamptz,
     created_at timestamptz,
@@ -37,9 +37,9 @@ CREATE TABLE data.transfer (
     appid text NOT NULL,
     openid text NOT NULL,
     amount int NOT NULL,
-    order_no text NOT NULL,
+    client_ip text,
     description text,
-    status data.transfer_status NOT NULL DEFAULT 'pending',
+    status data.transfer_status DEFAULT 'pending',
     failure_msg text,
     created_at timestamptz,
     updated_at timestamptz,
@@ -57,6 +57,7 @@ CREATE TABLE data.app (
     name text,
     cert_path text,
     api_key text,
+    notify_url text,
     created_at timestamptz,
     updated_at timestamptz,
     PRIMARY KEY (id)
@@ -74,16 +75,13 @@ CREATE TABLE data.refund (
     description text,
     status data.refund_status DEFAULT 'pending',
     failure_msg text,
+    appid text NOT NULL,
     successd_at timestamptz,
     created_at timestamptz,
     updated_at timestamptz,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id, appid)
 );
 
 CREATE INDEX ON data.refund
     (recharge_id);
 
-
-ALTER TABLE data.recharge ADD CONSTRAINT FK_recharge__appid FOREIGN KEY (appid) REFERENCES data.app(id);
-ALTER TABLE data.transfer ADD CONSTRAINT FK_transfer__appid FOREIGN KEY (appid) REFERENCES data.app(id);
-ALTER TABLE data.refund ADD CONSTRAINT FK_refund__recharge_id FOREIGN KEY (recharge_id) REFERENCES data.recharge(id);

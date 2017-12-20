@@ -81,7 +81,7 @@ router.post('/', async (ctx, next) => {
         let xml = builder.buildObject(opt);
         console.log('xml', xml)
 
-        let pfx = fs.readFileSync(__dirname + '/../../public/apiclient_cert.p12')
+        let pfx = fs.readFileSync(__dirname + '/../cert/' + app.cert_path)
         let res = await request
                             .post('https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfer') 
                             .pfx(pfx)
