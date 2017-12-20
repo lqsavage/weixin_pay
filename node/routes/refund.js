@@ -16,10 +16,10 @@ router.post('/', async (ctx, next) => {
 
     //查询app及recharge相关信息
     let app      = await knex('app').where({ id }).first()
-    let appid    = app.appid
+    let appid    = app.wx_appid
     let key      = app.api_key
     let mch_id   = app.mchid
-    let recharge = await knex('recharge').where({ id:  recharge_id }).first()
+    let recharge = await knex('recharge').where({ id: recharge_id }).first()
 
     //参数校验
     if (appid && recharge_id && amount) {

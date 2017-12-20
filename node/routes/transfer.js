@@ -16,9 +16,9 @@ router.post('/', async (ctx, next) => {
     let client_ip = ctx.request.body.client_ip
 
     //查询app相关信息
-    let app = await knex('app').where({ id }).first()
-    let appid = app.appid
-    let key = app.api_key
+    let app    = await knex('app').where({ id }).first()
+    let appid  = app.wx_appid
+    let key    = app.api_key
     let mch_id = app.mchid
 
     //参数校验
