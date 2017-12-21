@@ -40,9 +40,10 @@ router.post('/', async (ctx, next) => {
             id         : out_refund_no,
             appid      : id,
             recharge_id: recharge_id,
-            order_no   : out_trade_no,
+            order_no   : out_refund_no,
             amount     : amount,
-            description: desc || '退款'
+            description: desc || '退款',
+            created_at : new Date()
         })
 
         let opt = {
