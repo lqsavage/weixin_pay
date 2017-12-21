@@ -12,15 +12,15 @@ router.post('/', async (ctx, next) => {
   console.log('app', app)
   //退款通知
   if (body.req_info){
-    let stringA = new Buffer(body.req_info[0]).toString('base64')
+    let stringA = new Buffer(body.req_info[0], 'base64').toString()
     let md5sum = crypto.createHash('md5')
     md5sum.update(app.api_key)
     let key = md5sum.digest('hex').toLowerCase()
     console.log('key', key)
-    let decipher = crypto.createDecipher('aes-256-cbc', key)
+    let decipher = crypto.createDecipher('aes-256-ecb', key)
     // 使用BASE64对密文进行解码，然后AES-CBC解密
-    decipher.setAutoPadding(false)
-    let msg = decipher.update(stringA, 'hex', 'utf8')
+    // decipher.setAutoPadding(false)
+    let msg = decipher.update(stringA, 'base64', 'utf8')
     msg += decipher.final('utf8')
     console.log('msg', msg)
 
