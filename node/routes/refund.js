@@ -36,7 +36,7 @@ router.post('/', async (ctx, next) => {
 
         //生成退款订单
         await knex('refund').insert({
-            id: recharge_id,
+            id: out_refund_no,
             appid      : id,
             recharge_id: recharge_id,
             amount     : amount,
@@ -48,7 +48,7 @@ router.post('/', async (ctx, next) => {
             mch_id       : mch_id,
             nonce_str    : str,
             out_trade_no : recharge_id,
-            out_refund_no: recharge_id,
+            out_refund_no: out_refund_no,
             total_fee    : recharge.amount,
             refund_fee   : amount
         }
@@ -59,7 +59,7 @@ router.post('/', async (ctx, next) => {
             &mch_id         = ${mch_id}
             &nonce_str      = ${str}
             &out_refund_no  = ${recharge_id}
-            &out_trade_no   = ${recharge_id}
+            &out_trade_no   = ${out_refund_no}
             &refund_fee     = ${amount}
             &total_fee      = ${recharge.amount}
             &key            = ${key}
