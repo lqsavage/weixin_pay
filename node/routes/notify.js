@@ -23,7 +23,18 @@ router.post('/', async (ctx, next) => {
     console.log('msg', msg)
     let xml = await xmlParser(msg)
     console.log('xml', xml)
-
+    if (xml.refund_status && xml.refund_status[0] == 'SUCCESS'){
+      await knex('refund').update({ status: 'succeeded', succeeded_at: new Date() }).where({ id: xml.out_refund_no[0] })
+      await knex('recharge').update({ status: 'refunded' }).increment('amount_refunded', xml.refund_fee[0]).where({ id: xml.out_trade_no[0]})
+      for (i of app.notify_url) {
+        await request('POST', i).send({ "type": "refund.succeeded", order_no: xml.out_trade_no[0], refund_amount: xml.refund_fee[0] })
+      }
+    }else {
+      await knex('refund').update({ status: 'failed', failure_msg: xml.return_msg[0] }).where({ id: xml.out_refund_no[0] })
+      for (i of app.notify_url) {
+        await request('POST', i).send({ "type": "refund.failed", order_no: xml.out_trade_no[0], failure_msg: xml.return_msg[0] })
+      }
+    }
   }else{
     let order_no = body.out_trade_no[0]
     let order = await knex('recharge').where({ order_no }).first()

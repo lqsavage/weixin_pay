@@ -57,7 +57,7 @@ CREATE TABLE data.app (
     name text,
     cert_path text,
     api_key text,
-    notify_url text,
+    notify_url text[],
     created_at timestamptz,
     updated_at timestamptz,
     PRIMARY KEY (id)
@@ -76,7 +76,7 @@ CREATE TABLE data.refund (
     status data.refund_status DEFAULT 'pending',
     failure_msg text,
     appid text NOT NULL,
-    successd_at timestamptz,
+    successed_at timestamptz,
     created_at timestamptz,
     updated_at timestamptz,
     PRIMARY KEY (id, appid)

@@ -8,9 +8,10 @@ module.exports = (string) => {
         parser.parseString(string, (err, data) => {
             if (err) { 
                 console.log('err', err)
-                return reject(err); 
+                return reject(err)
             }
-            return resolve(data.xml);
+            if(data.xml) resolve(data.xml)
+            else resolve(data.root)
         })
     });
 }
