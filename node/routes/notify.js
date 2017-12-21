@@ -1,8 +1,7 @@
 const router = require('koa-router')()
-const xml = require('../middleware/xml')
 
-router.get('/', xml, (ctx, next) => {
-  ctx.body = ctx.xml
+router.post('/', async (ctx, next) => {
+  let body = ctx.request.body
   console.log('body', ctx)
 })
 
