@@ -7,9 +7,7 @@ router.post('/', async (ctx, next) => {
   let body = ctx.request.body.xml
   console.log('body', body)
   //查询订单
-  let order_no = body.out_trade_no[0]
-  let order = await knex('recharge').where({ order_no }).first()
-  console.log('order', order)
+
   let app = await knex('app').where({ wx_appid: body.appid[0] }).first()
   console.log('order', app)
   //退款通知
@@ -25,6 +23,9 @@ router.post('/', async (ctx, next) => {
     console.log('msg', msg)
 
   }else{
+    let order_no = body.out_trade_no[0]
+    let order = await knex('recharge').where({ order_no }).first()
+    console.log('order', order)
     if (body.return_code[0] == 'SUCCESS') {
       if(order.status == 'pending'){
         await knex('recharge').update({ status: 'paid', paid_at: new Date() }).where({ order_no })
