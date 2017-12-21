@@ -20,6 +20,7 @@ router.post('/', async (ctx, next) => {
     decipher.setAutoPadding(false)
     let msg = decipher.update(body.req_info[0], 'base64', 'utf8')
     msg += decipher.final('utf8')
+    console.log('msg', msg)
     let xml = await xmlParser(msg)
     console.log('xml', xml)
 

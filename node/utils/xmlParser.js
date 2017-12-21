@@ -6,7 +6,10 @@ const parser = new xml2js.Parser()
 module.exports = (string) => {
     return new Promise((resolve, reject) => {
         parser.parseString(string, (err, data) => {
-            if (err) { return reject(err); }
+            if (err) { 
+                console.log('err', err)
+                return reject(err); 
+            }
             return resolve(data.xml);
         })
     });
