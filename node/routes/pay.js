@@ -110,8 +110,8 @@ router.post('/', async (ctx, next) => {
             let paySign = md5.digest('hex').toUpperCase()
 
             order.recharge = {
-                appid: appid,
-                timestamp: timeStamp,
+                appId: appid,
+                timeStamp: timeStamp,
                 nonceStr: opt.nonce_str,
                 package: `prepay_id=${result.prepay_id[0]}`,
                 paySign: paySign,
