@@ -67,7 +67,7 @@ router.post('/', async (ctx, next) => {
             &refund_fee    = ${amount}
             &total_fee     = ${recharge.amount}
             &key           = ${key}
-        `
+        `.replace(/\n|\s/g, '')
         console.log('stringA', stringA)
 
         let md5 = crypto.createHash('md5')
