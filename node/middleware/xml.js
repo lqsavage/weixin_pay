@@ -6,6 +6,7 @@ module.exports = (ctx, next) => {
         if (ctx.is('text/xml')) {
             ctx.req.on('data', (data) => {
                 parser.parseString(data, (err, result) => {
+                    console.log('result1', result)
                     resolve(result.xml)
                 })
             })
