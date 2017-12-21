@@ -7,6 +7,7 @@ module.exports = (ctx, next) => {
             ctx.req.on('data', (data) => {
                 parser.parseString(data, (err, result) => {
                     console.log('result1', result)
+                    console.log('err', err)
                     resolve(result.xml)
                 })
             })
