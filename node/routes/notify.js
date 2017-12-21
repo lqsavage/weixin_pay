@@ -19,7 +19,7 @@ router.post('/', async (ctx, next) => {
     console.log('key', key)
     let decipher = crypto.createDecipher('aes-256-ecb', key)
     // 使用BASE64对密文进行解码，然后AES-CBC解密
-    // decipher.setAutoPadding(false)
+    decipher.setAutoPadding(false)
     let msg = decipher.update(stringA, 'base64', 'utf8')
     msg += decipher.final('utf8')
     console.log('msg', msg)
