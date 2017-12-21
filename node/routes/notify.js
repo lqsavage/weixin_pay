@@ -9,6 +9,7 @@ router.post('/', async (ctx, next) => {
                 <return_msg><![CDATA[OK]]></return_msg>
               </xml>`
   let body = ctx.request.body.xml
+  console.log('body', body)
   //查询订单
   let order_no = body.out_trade_no[0]
   let order = await knex('recharge').where({ order_no }).first()
