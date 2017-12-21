@@ -13,7 +13,6 @@ router.post('/', async (ctx, next) => {
     let id          = ctx.request.body.pay_appid
     let recharge_id = ctx.request.body.recharge_id
     let amount      = ctx.request.body.amount
-    let desc        = ctx.request.body.desc
 
     //查询app及recharge相关信息
     let app      = await knex('app').where({ id }).first()
@@ -41,7 +40,6 @@ router.post('/', async (ctx, next) => {
             appid      : id,
             recharge_id: recharge_id,
             amount     : amount,
-            description: desc || '退款',
             created_at : new Date()
         })
 
@@ -52,8 +50,7 @@ router.post('/', async (ctx, next) => {
             out_trade_no : recharge_id,
             out_refund_no: out_refund_no,
             total_fee    : recharge.amount,
-            refund_fee   : amount,
-            refund_desc  : desc || '退款'
+            refund_fee   : amount
         }
 
         //生成签名
@@ -63,7 +60,6 @@ router.post('/', async (ctx, next) => {
             &nonce_str     = ${str}
             &out_refund_no = ${out_refund_no}
             &out_trade_no  = ${recharge_id}
-            &refund_desc   = ${opt.desc}
             &refund_fee    = ${amount}
             &total_fee     = ${recharge.amount}
             &key           = ${key}
