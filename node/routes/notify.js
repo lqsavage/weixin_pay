@@ -4,10 +4,6 @@ const request = require('superagent')
 const crypto = require('crypto')
 
 router.post('/', async (ctx, next) => {
-  ctx.body = `<xml>
-                <return_code><![CDATA[SUCCESS]]></return_code>
-                <return_msg><![CDATA[OK]]></return_msg>
-              </xml>`
   let body = ctx.request.body.xml
   console.log('body', body)
   //查询订单
@@ -41,6 +37,10 @@ router.post('/', async (ctx, next) => {
       await request('POST', app.notify_url).send({ "type": "charge.failed", order_no, failure_msg: body.return_msg[0]})
     }
   }
+  ctx.body = `<xml>
+                <return_code><![CDATA[SUCCESS]]></return_code>
+                <return_msg><![CDATA[OK]]></return_msg>
+              </xml>`
 })
 
 module.exports = router
