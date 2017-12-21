@@ -50,8 +50,7 @@ router.post('/', async (ctx, next) => {
             out_trade_no : recharge_id,
             out_refund_no: recharge_id,
             total_fee    : recharge.amount,
-            refund_fee   : amount,
-            transaction_id: ''
+            refund_fee   : amount
         }
 
         //生成签名
@@ -63,7 +62,6 @@ router.post('/', async (ctx, next) => {
             &out_trade_no   = ${recharge_id}
             &refund_fee     = ${amount}
             &total_fee      = ${recharge.amount}
-            &transaction_id = 
             &key            = ${key}
         `.replace(/\n|\s/g, '')
         console.log('stringA', stringA)
