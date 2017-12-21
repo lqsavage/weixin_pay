@@ -114,7 +114,7 @@ router.post('/', async (ctx, next) => {
                 appid    : appid,
                 timestamp: timeStamp,
                 nonceStr : opt.nonce_str,
-                package  : 'prepay_id = ' + result.prepay_id[0],
+                package  : `prepay_id=${result.prepay_id[0]}`,
                 paySign  : paySign,
                 signType : 'MD5'
             }
