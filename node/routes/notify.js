@@ -12,7 +12,7 @@ router.post('/', async (ctx, next) => {
   console.log('app', app)
   //退款通知
   if (body.req_info){
-    let stringA = new Buffer(body.req_info[0], 'base64').toString()
+    let stringA = new Buffer(body.req_info[0]).toString('base64')
     let md5sum = crypto.createHash('md5')
     md5sum.update(app.api_key)
     let key = md5sum.digest('hex').toLowerCase()
