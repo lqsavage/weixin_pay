@@ -36,7 +36,7 @@ router.post('/', async (ctx, next) => {
         let out_refund_no = new Date().getTime() + 'wx' + ran
 
         //生成退款订单
-        await knex('recharge').insert({
+        await knex('refund').insert({
             id         : out_refund_no,
             appid      : id,
             recharge_id: recharge_id,
