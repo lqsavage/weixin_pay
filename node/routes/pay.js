@@ -104,7 +104,7 @@ router.post('/', async (ctx, next) => {
                 &signType  = MD5
                 &timeStamp = ${timeStamp}
                 &key       = ${key}
-                `
+                `.replace(/\n|\s/g, '')
             md5 = crypto.createHash('md5')
             md5.update(string)
             let paySign = md5.digest('hex').toUpperCase()
