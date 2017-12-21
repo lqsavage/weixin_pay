@@ -2,6 +2,7 @@ const router = require('koa-router')()
 const knex = require('../utils/knexfile')
 const request = require('superagent')
 const crypto = require('crypto')
+const xmlParser = require('../utils/xmlParser')
 
 router.post('/', async (ctx, next) => {
   let body = ctx.request.body.xml
@@ -12,19 +13,15 @@ router.post('/', async (ctx, next) => {
   console.log('app', app)
   //退款通知
   if (body.req_info){
-    let stringA = new Buffer(body.req_info[0], 'base64').toString()
     let md5sum = crypto.createHash('md5')
     md5sum.update(app.api_key)
     let key = md5sum.digest('hex').toLowerCase()
-    console.log('key', key)
-    // let decipher = crypto.createDecipher('aes-256-ecb', key)
-    let decipher = crypto.createDecipheriv('aes-256-ecb', key, '');
-    decipher.setAutoPadding(false);
-    // 使用BASE64对密文进行解码，然后AES-CBC解密
-    // decipher.setAutoPadding(false)
+    let decipher = crypto.createDecipheriv('aes-256-ecb', key, '')
+    decipher.setAutoPadding(false)
     let msg = decipher.update(body.req_info[0], 'base64', 'utf8')
     msg += decipher.final('utf8')
-    console.log('msg', msg)
+    let xml = await xmlParser(msg)
+    console.log('xml', xml)
 
   }else{
     let order_no = body.out_trade_no[0]
