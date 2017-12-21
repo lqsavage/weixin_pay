@@ -16,7 +16,7 @@ router.post('/', async (ctx, next) => {
     let md5sum = crypto.createHash('md5')
     md5sum.update(app.api_key)
     let key = md5sum.digest('hex').toLowerCase()
-    decipher = crypto.Decipher('aes-256-cbc', key)
+    decipher = crypto.creatDecipher('aes-256-cbc', key)
     // 使用BASE64对密文进行解码，然后AES-CBC解密
     // decipher.setAutoPadding(false)
     let msg = decipher.update(stringA, 'base64', 'utf8') + decipher.final('utf8')
