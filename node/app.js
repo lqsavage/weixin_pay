@@ -5,7 +5,6 @@ const onerror    = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger     = require('koa-logger')
 const cors       = require('koa-cors')
-const xmlParser = require('koa-xml-body')
 const router = require('koa-router')()
 
 const notify     = require('./routes/notify')
@@ -17,7 +16,6 @@ const refund     = require('./routes/refund')
 onerror(app)
 
 // middlewares
-app.use(xmlParser())
 app.use(bodyparser({
   enableTypes:['json', 'form', 'text']
 }))
