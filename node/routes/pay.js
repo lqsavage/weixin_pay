@@ -36,7 +36,7 @@ router.post('/', async (ctx, next) => {
         let out_trade_no = new Date().getTime() + 'wx' + ran
 
         //生成支付订单
-        await knex('recharge').insert({
+        let order = (await knex('recharge').insert({
             id        : out_trade_no,
             appid     : id,
             order_no  : out_trade_no,
@@ -45,7 +45,7 @@ router.post('/', async (ctx, next) => {
             openid    : openid,
             client_ip : client_ip,
             trade_type: 'JSAPI'
-        })
+        }).returning('*'))[0]
 
         let opt = {
             appid           : appid,
@@ -109,15 +109,16 @@ router.post('/', async (ctx, next) => {
             md5.update(string)
             let paySign = md5.digest('hex').toUpperCase()
 
-            //返回
-            ctx.body = {
-                appid    : appid,
+            order.recharge = {
+                appid: appid,
                 timestamp: timeStamp,
-                nonceStr : opt.nonce_str,
-                package  : `prepay_id=${result.prepay_id[0]}`,
-                paySign  : paySign,
-                signType : 'MD5'
+                nonceStr: opt.nonce_str,
+                package: `prepay_id=${result.prepay_id[0]}`,
+                paySign: paySign,
+                signType: 'MD5'
             }
+            //返回
+            ctx.body = order
         } else{
             ctx.body = (result.return_msg[0])
             await knex('recharge').update({ status: 'failed', failure_msg: result.return_msg[0] }).where({ id: out_trade_no })
