@@ -36,7 +36,7 @@ router.post('/', async (ctx, next) => {
 
         //生成退款订单
         await knex('refund').insert({
-            id         : out_refund_no,
+            id: recharge_id,
             appid      : id,
             recharge_id: recharge_id,
             amount     : amount,
@@ -48,21 +48,23 @@ router.post('/', async (ctx, next) => {
             mch_id       : mch_id,
             nonce_str    : str,
             out_trade_no : recharge_id,
-            out_refund_no: out_refund_no,
+            out_refund_no: recharge_id,
             total_fee    : recharge.amount,
-            refund_fee   : amount
+            refund_fee   : amount,
+            transaction_id: ''
         }
 
         //生成签名
         let stringA = `
-            appid          = ${appid}
-            &mch_id        = ${mch_id}
-            &nonce_str     = ${str}
-            &out_refund_no = ${out_refund_no}
-            &out_trade_no  = ${recharge_id}
-            &refund_fee    = ${amount}
-            &total_fee     = ${recharge.amount}
-            &key           = ${key}
+            appid           = ${appid}
+            &mch_id         = ${mch_id}
+            &nonce_str      = ${str}
+            &out_refund_no  = ${recharge_id}
+            &out_trade_no   = ${recharge_id}
+            &refund_fee     = ${amount}
+            &total_fee      = ${recharge.amount}
+            &transaction_id = 
+            &key            = ${key}
         `.replace(/\n|\s/g, '')
         console.log('stringA', stringA)
 

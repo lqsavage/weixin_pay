@@ -25,16 +25,20 @@ router.post('/', async (ctx, next) => {
     console.log('msg', msg)
 
   }else{
-    if (body.return_code[0] == 'SUCCESS') {
+    if (body.result_code[0] == 'SUCCESS') {
       if(order.status == 'pending'){
         await knex('recharge').update({ status: 'paid', paid_at: new Date() }).where({ order_no })
-        await request('POST', app.notify_url).send({ "type": "charge.succeeded", order_no, openid: body.openid[0], amount: body.total_fee[0]})
+        for (i of app.notify_url){
+          await request('POST', i).send({ "type": "charge.succeeded", order_no, openid: body.openid[0], amount: body.total_fee[0] })
+        }
       }else {
         //不做任何处理
       }
     }else{
       await knex('recharge').update({ status: 'failed', failure_msg: body.return_msg[0] }).where({ order_no })
-      await request('POST', app.notify_url).send({ "type": "charge.failed", order_no, failure_msg: body.return_msg[0]})
+      for (i of app.notify_url) {
+        await request('POST', i).send({ "type": "charge.failed", order_no, failure_msg: body.return_msg[0]})
+      }
     }
   }
   ctx.body = `<xml>
