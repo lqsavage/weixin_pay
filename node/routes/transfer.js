@@ -100,10 +100,11 @@ router.post('/', async (ctx, next) => {
 
         //返回
         if (result.result_code[0] == 'SUCCESS') {
-            ctx.body = 'success'
-            await knex('transfer').update({ status: 'paid' }).where({ id: partner_trade_no})
+            let transfer =  (await knex('transfer').update({ status: 'paid' }).where({ id: partner_trade_no}).returning('*'))[0]
+            ctx.body = { type: 'transfer.success', transfer}
+            
         }else{
-            ctx.body = result.return_msg[0]
+            ctx.body = { type: 'transfer.failed', failure_msg: result.return_msg[0] }
             await knex('transfer').update({ status: 'failed', failure_msg: result.return_msg[0] }).where({ id: partner_trade_no })
         }
 
