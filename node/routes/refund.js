@@ -78,7 +78,7 @@ router.post('/', async (ctx, next) => {
 
         let pfx = fs.readFileSync(__dirname + '/../cert/' + app.cert_path + '.p12')
         let res = await request
-            .post('https://api.mch.weixin.qq.com/pay/refundquery')
+            .post('https://api.mch.weixin.qq.com/secapi/pay/refund')
             .pfx({
                 pfx,
                 passphrase: Buffer.from(mch_id)
