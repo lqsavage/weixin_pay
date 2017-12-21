@@ -55,7 +55,8 @@ router.post('/', async (ctx, next) => {
             spbill_create_ip: client_ip,
             check_name      : 'NO_CHECK',
             openid          : openid,
-            created_at: new Date()
+            created_at: new Date(),
+            transaction_id: ''
         }
 
         //生成签名

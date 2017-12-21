@@ -47,8 +47,8 @@ router.post('/', async (ctx, next) => {
             appid        : appid,
             mch_id       : mch_id,
             nonce_str    : str,
-            out_trade_no : recharge_id,
             out_refund_no: out_refund_no,
+            out_trade_no : recharge_id,
             total_fee    : recharge.amount,
             refund_fee   : amount
         }
@@ -91,7 +91,7 @@ router.post('/', async (ctx, next) => {
         console.log('result', result)
 
         //返回
-        if (result.result_code[0] == 'SUCCESS') {
+        if (result.return_code[0] == 'SUCCESS') {
             ctx.body = 'success'
         } else {
             ctx.body = result.return_msg[0]

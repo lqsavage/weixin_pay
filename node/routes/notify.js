@@ -25,7 +25,7 @@ router.post('/', async (ctx, next) => {
     console.log('msg', msg)
 
   }else{
-    if (body.result_code[0] == 'SUCCESS') {
+    if (body.return_code[0] == 'SUCCESS') {
       if(order.status == 'pending'){
         await knex('recharge').update({ status: 'paid', paid_at: new Date() }).where({ order_no })
         for (i of app.notify_url){
