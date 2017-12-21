@@ -44,7 +44,8 @@ router.post('/', async (ctx, next) => {
             body      : body || '充值',
             openid    : openid,
             client_ip : client_ip,
-            trade_type: 'JSAPI'
+            trade_type: 'JSAPI',
+            created_at: new Date()
         }).returning('*'))[0]
 
         let opt = {
