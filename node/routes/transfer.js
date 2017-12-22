@@ -15,6 +15,7 @@ router.post('/', async (ctx, next) => {
     let amount    = ctx.request.body.amount
     let desc      = ctx.request.body.desc
     let client_ip = ctx.request.body.client_ip
+    let order_no = ctx.request.body.order_no
 
     //查询app相关信息
     let app    = await knex('app').where({ id }).first()
@@ -33,7 +34,7 @@ router.post('/', async (ctx, next) => {
         console.log('str', str)
 
         //生成订单号
-        let partner_trade_no = new Date().getTime() + 'wx' + ran
+        let partner_trade_no = order_no || new Date().getTime() + 'wx' + ran
 
         //生成企业付款订单
         await knex('transfer').insert({
