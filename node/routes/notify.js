@@ -43,6 +43,7 @@ router.post('/', async (ctx, next) => {
       if(order.status == 'pending'){
         await knex('recharge').update({ status: 'paid', paid_at: new Date() }).where({ order_no })
         for (i of app.notify_url){
+          console.log('notify_url_recharge_success:' i)
           await request('POST', i).send({ "type": "charge.succeeded", order_no, openid: body.openid[0], amount: body.total_fee[0] })
         }
       }else {

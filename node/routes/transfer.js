@@ -43,7 +43,8 @@ router.post('/', async (ctx, next) => {
             amount     : amount,
             description: desc || '提现',
             openid     : openid,
-            client_ip  : client_ip
+            client_ip  : client_ip,
+            created_at: new Date(),
         })
 
         let opt = {
