@@ -1,0 +1,14 @@
+{
+    "presets": ["es2015", "stage-2"],
+    "plugins": ["add-module-exports"],
+    "ignore": [
+      "angular.js",
+      "angular.min.js",
+      "ng-admin.js",
+      "ng-admin.min.js",
+      "vue.js",
+      "vue.min.js",
+      "lodash.js",
+      "lodash.min.js"
+    ]
+}

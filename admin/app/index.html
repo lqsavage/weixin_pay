@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="text/javascript" src="./echarts.min.js"></script>
+  <!-- <link rel="stylesheet" type="text/css" href="theme.css"> -->
+</head>
+
+<body ng-app="app" ng-strict-di>
+<!--[if lt IE 9]>
+<div style=" text-align:center;">
+  <div style="width: 360px;margin:auto;margin-top:60px;padding:20px;line-height: 2; background-color: #3cf; color: #fff;">
+    抱歉，我们暂不支持IE9以下浏览器，请使用高版本的IE浏览器或Chrome、火狐及Chrome内核的360，搜狗，QQ等浏览器访问本站。
+  </div>
+</div>
+<![endif]-->
+  <div ui-view="ng-admin" id="body"></div>
+<style>
+  #error-frame{
+    display: none;
+    background: #000;
+    color: #0f0;
+    position: absolute;
+    left:0;
+    top: 0;
+    width: 500px;
+    height: 200px;
+    z-index: 999999999;
+    overflow-y: scroll;
+  }
+</style>
+<div id="error-frame">
+
+</div>
+<script>
+  function openCustomConsole() {
+    //document.getElementById('error-frame').style.display = 'block'
+    var _console = {}
+    for (let key in console || ['debug', 'error', 'info', 'log', 'warn', 'dir', 'dirxml', 'table', 'trace', 'group', 'groupCollapsed', 'groupEnd', 'clear', 'count', 'assert', 'markTimeline', 'profile', 'profileEnd', 'timeline', 'timelineEnd', 'time', 'timeEnd', 'timeStamp', 'context', 'memory']){
+      _console[key] = function (args) {
+        //let str = key + ': '
+        //arguments.length && arguments.forEach(i => str += i + ' ')
+        alert(args)
+        //document.getElementById('error-frame').innerHTML += '<br/>' + args
+      }
+    }
+    window.nativeConsole = console
+    window.console = _console
+    window.Error = function (args) {
+      return console.log(args)
+    }
+    throw new Error(3434344)
+  }
+</script>
+  <script type="text/javascript">
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,379 @@
+@import '../../node_modules/ng-admin/build/ng-admin.min.css';
+
+
+// $main:#5683ad;
+// $bg:#4e97d9;
+// $bg-side:#5683ad;
+$main = #34a782;
+$bg = #1fa67a;
+$bg-side = #1b926c;
+$bg-gray =#f8f8f8;
+$danger = #d43f3a;
+$progress-bar-color = #ff8337;
+@media (min-width: 768px){ .max767{display: none !important;}}
+@media (max-width: 767px){ .min768{display: none !important;}}
+
+body{
+  font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", STHeiti, "Microsoft YaHei" !important;
+  overflow-x: hidden !important;
+  background-color: $bg-gray !important;
+}
+.btn-primary{
+  background-color: $main !important;
+  border-color: $main !important;
+}
+.nav>li>a {
+  font-size: 14px !important;
+  color: rgba(163,175,183,.9) !important;
+}
+.sidebar ul li a.active {
+  background-color: $bg-side !important;
+  color: white !important;
+}
+.sidebar ul li a:hover {
+  background-color: #4A5064 !important;
+}
+.sidebar ul li {
+  border:none !important;
+}
+.navbar-default {
+  background-color: $bg !important;
+  /*border-color: #e7e7e7 !important;*/
+}
+.sidebar{
+  position: fixed !important;
+  margin-top: 0 !important ;
+  top:60px ;
+  width: 240px !important;
+  z-index: 1030 !important;
+  height: 100% !important;
+  height: -webkit-calc(100% - 60px) !important;
+  height: calc(100% - 60px) !important;
+  color: rgba(163,175,183,.9) !important;
+  background: #263238 !important;
+  -webkit-box-shadow: 0 2px 4px rgba(0,0,0,.08) !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,.08) !important;
+  overflow-y: auto !important;
+}
+@media (max-width: 767px){
+  .sidebar{
+    position: relative !important;
+    width: 100% !important;
+    overflow-y: scroll !important;
+  }
+  ma-menu-bar{
+    width: 100%;
+  }
+  #side-menu{
+    overflow-y: auto !important;
+  }
+  .sidebar-nav{
+    overflow-y: auto !important;
+  }
+}
+
+.navbar-default .navbar-brand{
+  color: white !important;
+}
+a{
+  color: $main;
+}
+.panel {
+    margin-bottom: 20px !important;
+    background-color: #fff !important;
+    border: 1px solid transparent !important;
+    border-radius: 0 !important;
+    /*box-shadow: 0 1px 1px rgba(0,0,0,.05) !important;*/
+}
+.panel-heading {
+    padding: 10px 15px !important;
+    border-bottom: 1px solid transparent !important;
+    border-top-right-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 8px !important;
+    line-height: 1.42857 !important;
+    vertical-align: top !important;
+    border-top: 1px solid #eaeaea !important;
+}
+.table>thead>tr>th {
+    vertical-align: bottom !important;
+    border-bottom: 1px solid #eaeaea !important;
+}
+.dashboard-content .panel-default .panel-heading {
+    background-color: white !important;
+    border-color: #ddd !important;
+}
+.ui-select-bootstrap .ui-select-choices-row.active>a {
+    background-color: $main !important;
+}
+.form-control:focus {
+    border-color: $main !important;
+    outline: 0 !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px $main
+}
+.btn-info, .btn-info.active, .btn-info:active, .btn-info:hover, .open>.btn-info.dropdown-toggle{
+    color: #fff !important;
+    background-color: $main !important;
+    border-color: $main !important;
+}
+.has-success .form-control {
+    border-color: $main !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075) !important;
+}
+.has-success .checkbox, .has-success .checkbox-inline, .has-success.checkbox-inline label, .has-success.checkbox label, .has-success .control-label, .has-success .help-block, .has-success .radio, .has-success .radio-inline, .has-success.radio-inline label, .has-success.radio label {
+    color: $main !important;
+}
+.btn{
+  border-radius: 0 !important;
+}
+.form-control{
+  border-radius: 0 !important;
+}
+.btn-primary.active, .btn-primary:active, .btn-primary:hover, .open>.btn-primary.dropdown-toggle {
+    background-color: $main !important;
+    border-color: $main !important;
+}
+.btn-link {
+    color: $main !important;
+}
+.navbar {
+    min-height: 60px !important;
+    position:fixed !important;
+    width: 100% !important;
+    top:0 !important;
+    border:0 !important;
+    display: flex !important;
+    z-index: 1040 !important;
+    -webkit-box-shadow: 0 2px 4px rgba(0,0,0,.08) !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,.08) !important;
+}
+.navbar-brand {
+    font-size: 18px !important;
+    line-height: 30px !important;
+    height: 60px !important;
+}
+#page-wrapper{
+    height: -webkit-calc(100% - 80px) !important;
+    height: calc(100% - 80px) !important;
+    width: -webkit-calc(100% - 260px) !important;
+    width: calc(100% - 260px) !important;
+    top: 75px !important;
+    position: absolute !important;
+    // background-color: $bg-gray !important;
+    border: 1px solid #e7e7e7 !important;
+    margin-right: 10px !important;
+    overflow-y: auto !important;
+
+}
+@media(max-width: 767px){
+  #page-wrapper{
+    width: 100% !important;
+  }
+}
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
+    background-color: $bg !important;
+    border-color: $bg !important;
+}
+.nav>li>a:focus, .nav>li>a:hover {
+    text-decoration: none !important;
+    background-color: $bg !important;
+}
+.navbar-top-links li a {
+    min-height: 60px !important;
+    padding-top:20px !important;
+    color: white !important;
+}
+.navbar-top-links li ul a {
+    color: #333 !important;
+}
+.navbar-brand-logo{
+  margin:15px 0 15px 30px !important;
+  width: 30px !important;
+  height: 30px !important;
+}
+.navbar-brand{
+  flex: 1 !important;
+}
+#side-menu{
+  padding-top:10px !important;
+}
+.has-success .form-control:focus {
+    border-color: $main !important;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 6px $main !important;
+}
+a.text-success:hover {
+    color: $main !important;
+}
+.alert-success .alert-link {
+    color: $main
+}
+.has-success .input-group-addon {
+    color: $main !important;
+    border-color: $main !important;
+    background-color: $main
+}
+
+.has-success .form-control-feedback {
+    color: $main
+}
+.glyphicon-remove{
+    color: $danger !important;
+}
+.navbar-default .navbar-brand:hover {
+    color: white !important;
+}
+.board_list{
+  .list_out{
+    float: left !important;
+    width: 168px !important;
+    width: -webkit-calc(16.666667% - 19px) !important;
+    width: calc(16.666667% - 19px) !important;
+    height: 85px !important;
+    color: white !important;
+    padding: 15px 5px !important;
+    margin-left: 20px !important;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05) !important;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05) !important;
+    &:nth-of-type(1){
+      margin-left: 0 !important;
+    }
+    &:nth-of-type(4n + 1){
+      background-color:#fc8675 !important;
+      box-shadow: 0 5px 0 #e27869 !important;
+    }
+    &:nth-of-type(4n + 2){
+      background-color:#5AB6DF !important;
+      box-shadow: 0 5px 0 #51a3c8 !important;
+    }
+    &:nth-of-type(4n + 3){
+      background-color:#4acacb !important;
+      box-shadow: 0 5px 0 #42b5b6 !important;
+    }
+    &:nth-of-type(4n + 0){
+      background-color:#6a8abe !important;
+      box-shadow: 0 5px 0 #5f7cab !important;
+    }
+    .list_title{
+      text-align: left !important;
+      margin-bottom: 0 !important;
+    }
+    .list_count{
+      font-size: 30px !important;
+      text-align: right !important;
+      padding-right: 5px;
+    }
+  }
+}
+.chart{
+  width: -webkit-calc(50% - 20px) !important;
+  width: calc(50% - 20px) !important;
+  height: 400px !important;
+  float: left !important;
+  margin-left:20px !important; 
+  &:nth-of-type(odd){
+    margin-left:0 
+  }
+}
+.board_list_deliver{
+  padding-bottom:30px !important;
+  border-bottom:1px solid #e7e7e7 !important;
+}
+::-webkit-scrollbar {
+      width: 0 !important;
+ }
+#nprogress .bar {
+    z-index: 10310 !important;
+    top:60px !important;
+    background: $progress-bar-color !important;
+}
+#nprogress .peg {
+    box-shadow: none !important;
+}
+#nprogress .spinner {
+    z-index: 10310 !important;
+    top: 80px !important;
+    right: 15px
+}
+#nprogress .spinner-icon {
+    border-top-color: $progress-bar-color;
+    border-left-color: $progress-bar-color;
+}
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    background-color: $main !important;
+    border-color: $main !important;
+}
+.pagination>li>a, .pagination>li>span {
+    color: $main;
+}
+.has-success .checkbox,
+.has-success .checkbox-inline,
+.has-success.checkbox-inline label,
+.has-success.checkbox label,
+.has-success .control-label,
+.has-success .help-block,
+.has-success .radio,
+.has-success .radio-inline,
+.has-success.radio-inline label,
+.has-success.radio label {
+    color: $main !important;
+}
+.glyphicon{
+  color: #666 !important;
+}
+
+.ng-admin-column-actions {
+  color: $main !important;
+}
+.glyphicon-remove{
+  color: gray !important;
+}
+.glyphicon-ok{
+  color: $main
+}
+.ng-admin-type-referenced_list{
+  margin-bottom: 20px !important;
+}
+
+.label-default,
+.label-primary{
+  background-color: $main !important;
+}
+.grid .label {
+  display: inline-block;
+  margin-bottom: 5px;
+}
+.btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary:active.focus, .btn-primary:active:focus, .btn-primary:active:hover, .open>.btn-primary.dropdown-toggle.focus, .open>.btn-primary.dropdown-toggle:focus, .open>.btn-primary.dropdown-toggle:hover {
+    color: #fff !important;
+    background-color: $main !important;
+    border-color: $main !important;
+}
+span.ui-select-match[placeholder]+input[role="combobox"]{
+  border: 1px solid #ccc;
+  width 80%;
+  margin-bottom: 5px !important;
+}
+
+input:hover,
+textarea:hover,
+span.ui-select-match[placeholder]+input[role="combobox"]:hover,
+span.ui-select-match[placeholder]+input[role="combobox"]:focus,
+span.ui-select-match[placeholder]+input[role="combobox"]:active{
+  border: 1px solid $main;
+}
+
+.modal-dialog{
+  top: auto;
+  transform: translateY(0%) !important;
+}
+.modal-footer{
+  border-top 0 !important
+}
+
+
+.common-listView-tempFiled tr td:nth-child(1){color: $main;}
+.common-listView-tempFiled tr td{padding-right: 10px;}
+.common-listView-tempFiled tr td:nth-last-of-type(){padding-right: auto;}
+.common-listView-tempFiled [content="失败"]{color: $danger ;}
+.common-listView-tempFiled [content="成功"]{color: #0f0;}

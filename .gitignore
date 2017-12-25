@@ -19,3 +19,7 @@ node_modules
 npm-debug.log
 subl
 cert/*
+/.idea/
+/admin/node_modules/
+/admin/package-lock.json
+/package-lock.json

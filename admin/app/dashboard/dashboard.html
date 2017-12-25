@@ -1,0 +1,53 @@
+<div class="row scope-directive-dashboard">
+    <div class="col-lg-12 board_list_deliver">
+
+        <div class="board_list" ng-if="role !== 'followuper'">
+            <div class="list_out" ng-repeat="x in countList" draggable=true>
+                <p class="list_title">{{x.name}}</p>
+                <p class="list_count">{{x.count}}</p>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+
+        <div class="followuper" ng-if="role === 'followuper'">
+            <p class="bread"><a href="">今日待办</a></p>
+            <div class="board_list" >
+                <div class="list_out" ng-repeat="x in [countList[0], countList[1]]" draggable=true>
+                    <p class="list_title">{{x.name}}</p>
+                    <p class="list_count">{{x.count}}</p>
+                </div>
+                <div style="clear:both"></div>
+            </div>
+            <div style="height: 50px;"></div>
+            <p class="bread"><a href="">逾期任务</a></p>
+            <div class="board_list">
+                <div class="list_out" ng-repeat="x in [countList[2], countList[3]]" draggable=true>
+                    <p class="list_title">{{x.name}}</p>
+                    <p class="list_count">{{x.count}}</p>
+                </div>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12" style="padding-top:30px">
+        <div id="user" class="chart"></div>
+        <div id="consult" class="chart"></div>
+        <div id="book" class="chart"></div>
+        <div id="followup" class="chart"></div>
+    </div>
+</div>
+<style style="display: none !important;">
+    .scope-directive-dashboard .bread{
+        border: 1px solid #34a782 ;
+        /*color: #fff;*/
+        margin: 10px 0;
+        padding: 5px;
+    }
+    /*.scope-directive-dashboard .followuper .list_out{
+        border: 1px solid #34a782 ;
+    background-color: transparent
+    }*/
+</style>

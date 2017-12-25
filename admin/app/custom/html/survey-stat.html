@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="col-lg-12">
+        <ma-view-actions>
+            <ma-back-button></ma-back-button>
+        </ma-view-actions>
+        <div class="page-header">
+            <h1>{{controller.viewTitle}}</h1>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div>
+        <div ng-repeat="question in controller.entry.questions">
+            <!--div>{{question.title}}</div>
+                <!--div ng-repeat="option in question.options">{{option}}</div-->
+                <!--div ng-repeat="i in question.stat">
+                    <span ng-repeat="optionId in i.choose_option_ids">{{controller.options[optionId].text || '未选择'}}</span>
+                    {{i.count}}
+                </div-->
+            <div ng-hide="question.types === 'open'" id="survey-stat-question-{{question.id}}" class="chart"></div>
+            <!--div ng-if  ="question.types === 'open'" >
+                <div class="tc bold" style="font-size: 18px;">{{question.title}}<div class="bg-gray" style="height: 100%; width: 50%;">开放性问题暂时无法统计</div></div>
+
+            </div-->
+        </div>
+    </div>
+</div>
