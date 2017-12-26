@@ -3,9 +3,12 @@
  */
 export default function(nga){
   this.eName = 'recharge'
-  this.e         = nga.entity(this.eName)
+  this.e         = nga.entity(this.eName).readOnly(true)
   var id              = nga.field('id')
-  var appid           = nga.field('appid')
+  var appid           = nga.field('appid', 'reference')
+    .targetEntity(nga.entity('app'))
+    .targetField(nga.field('name'))
+    .label('应用')
   var order_no        = nga.field('order_no')
   var amount          = nga.field('amount')
   var body            = nga.field('body').label('描述')
@@ -39,7 +42,8 @@ export default function(nga){
 
 
   this.properties = [id, appid, order_no, amount, body, openid, client_ip, trade_type, amount_refunded, clientstatus_ip, failure_msg, paid_at, created_at, updated_at,]
-  this.e.listView().fields([id, tempFiled, created_at])
+  this.e.listView().fields([id, appid, tempFiled, created_at])
+  this.e.showView().fields(this.properties)
   this.e.title = '支付'
   this.e.menuRole = ['followuper', 'super_admin', 'kf', 'doc', 'hos_admin', 'dept_admin']
   this.e.icon = 'fa-street-view'

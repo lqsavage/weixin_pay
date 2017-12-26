@@ -3,7 +3,7 @@
  */
 export default function(nga){
   this.eName = 'app'
-  this.e         = nga.entity(this.eName)
+  this.e         = nga.entity(this.eName).readOnly(true)
   var id         = nga.field('id')
   var wx_appid   = nga.field('wx_appid')
   var mchid      = nga.field('mchid')
@@ -29,8 +29,9 @@ export default function(nga){
     `
   ).label(' ')
 
-  this.properties = [id, wx_appid, mchid, name, cert_path, api_key, notify_url, created_at, updated_at]
+  this.properties = [wx_appid, mchid, name, cert_path, api_key, notify_url, created_at, updated_at]
   this.e.listView().fields([id, tempFiled, created_at])
+  this.e.showView().fields(this.properties)
   this.e.title = '应用'
   this.e.menuRole = ['followuper', 'super_admin', 'kf', 'doc', 'hos_admin', 'dept_admin']
   this.e.icon = 'fa-street-view'

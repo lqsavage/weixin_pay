@@ -3,7 +3,7 @@
  */
 export default function(nga){
   this.eName = 'refund'
-  this.e         = nga.entity(this.eName)
+  this.e         = nga.entity(this.eName).readOnly(true)
   var id           = nga.field('id')
   var recharge_id  = nga.field('recharge_id')
   var description  = nga.field('description')
@@ -31,6 +31,7 @@ export default function(nga){
 
   this.properties = [id, recharge_id, description, status, failure_msg, appid, succeeded_at, created_at, updated_at,]
   this.e.listView().fields([id, tempFiled, created_at,])
+  this.e.showView().fields(this.properties)
   this.e.title = '退款'
   this.e.menuRole = ['followuper', 'super_admin', 'kf', 'doc', 'hos_admin', 'dept_admin']
   this.e.icon = 'fa-street-view'

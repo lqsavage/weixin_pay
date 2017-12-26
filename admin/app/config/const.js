@@ -1,5 +1,5 @@
 const dev_api_url = 'http://localhost:8888/pay/rest/'
-let prod_api_url = 'http://api.diandianyy.com/pay/rest/'
+let prod_api_url = 'http://api.diandianyy.com/util/pay-rest/'
 let prod_api_hostname = 'api.diandianyy.com'
 let API_URL_GRAPHQL = 'http://api.diandianyy.com/pay/graphql'
 let HEALTH_API_URL = 'http://api.diandianyy.com/health/'

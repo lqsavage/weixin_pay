@@ -3,7 +3,7 @@
  */
 export default function(nga){
   this.eName = 'transfer'
-  this.e         = nga.entity(this.eName)
+  this.e         = nga.entity(this.eName).readOnly(true)
   var id          = nga.field('id')
   var appid       = nga.field('appid')
   var openid      = nga.field('openid')
@@ -32,6 +32,7 @@ export default function(nga){
 
   this.properties = [id, tempFiled, created_at,]
   this.e.listView().fields(this.properties)
+  this.e.showView().fields(this.properties)
   this.e.title = '企业付款'
   this.e.menuRole = ['followuper', 'super_admin', 'kf', 'doc', 'hos_admin', 'dept_admin']
   this.e.icon = 'fa-street-view'

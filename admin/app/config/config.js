@@ -5,12 +5,13 @@ import { API_URL } from './const.js'
 window.agent = agent
 
 export default function(NgAdminConfigurationProvider) {
-  var userInfo = JSON.parse( localStorage.dfyyCrmAdmin_userInfo || '{"user":0}' )
-  //var role = userInfo.user ? userInfo.user.role : null
-  //if(!role){
-  //  //alert('获取用户角色失败，请重新登录!')
-  //  self.location = './login.html'
-  //}
+  var userInfo = JSON.parse( localStorage.dfyyCrmAdmin_userInfo || '{"user":{}}' )
+  userInfo.user.role = 'super_admin'
+  var role = userInfo.user ? userInfo.user.role : null
+  if(!role){
+    //alert('获取用户角色失败，请重新登录!')
+    self.location = './login.html'
+  }
 
 
   var nga = window.nga = NgAdminConfigurationProvider;
@@ -138,7 +139,7 @@ export default function(NgAdminConfigurationProvider) {
     ngaEntity = null
   }
   //app.dashboard(require('../dashboard/config')(nga, app))
-  nga.dashboard().template(app._title)
+  nga.dashboard().template('app._title')
   //配置错误提示
   app._errorMessage = app.defaultErrorMessage = function defaultErrorMessage(response) {
     let message = response.data && response.data.message || '操作失败!'

@@ -3,9 +3,16 @@ import { API_URL, HEALTH_API_URL, HEALTH_ENTITIES, API_MAP } from '../config/con
 export default function(RestangularProvider, $httpProvider) {
 
   RestangularProvider.addFullRequestInterceptor(function(element, operation, what, url, headers, params, httpConfig) {
-
     headers = headers || {};
     headers['Prefer'] = operation === 'getList' ? 'count=exact' : 'return=representation' //获取列表时, 获取确切计数
+
+    if(operation !== 'getList'){
+      if(url.indexOf( what + '/') > -1) {
+        let id = url.split(  what + '/' )[1]
+        id && (params.id = 'eq.' + id)
+        url = url.split(  what + '/' )[0] + what
+      }
+    }
 
     if (operation === 'getList') {
       headers['Range-Unit'] = what;
@@ -40,7 +47,6 @@ export default function(RestangularProvider, $httpProvider) {
           */
         }
     }
-
   })
 
   RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
@@ -60,8 +66,8 @@ export default function(RestangularProvider, $httpProvider) {
   })
 
   RestangularProvider.setErrorInterceptor(function(response, deferred, responseHandler) {
+    console.log(arguments)
     if (response.status === 400) {
-      console.log(arguments)
 
       //if(response && response.data && response.data.message){
       //  response.data.message = response.data.message.replace( '关系 "', '"')
@@ -77,11 +83,9 @@ export default function(RestangularProvider, $httpProvider) {
       //arguments[1].data.message &&
       //arguments[1].data.message.indexOf('permission denied for relation') > -1 && alert('没有权限访问!')
 
-      console.log(arguments)
       //return self.location = './login.html'
     }
     if (response.status === 404) {
-      console.log(arguments)
     }
     if (response.status === 405) {
       return alert('没有权限!')
@@ -95,7 +99,6 @@ export default function(RestangularProvider, $httpProvider) {
   $httpProvider.interceptors.push(function() {
     return {
       request: function(config) {
-
         //queryString替换
         config.nativeParamSerializer = config.paramSerializer
         config.paramSerializer = () =>
@@ -114,19 +117,37 @@ export default function(RestangularProvider, $httpProvider) {
             .replace('_NOT=eq.', '=not.')
             .replace('_IN=eq.', '=in.')
 
-        var pattern = /\/(\d+)$/
         var userInfo = JSON.parse(localStorage.dfyyCrmAdmin_userInfo || '{"user":0}')
 
         // config.headers["Authorization"] = 'Bearer ' + userInfo.jwt_token
 
+        //var pattern = /\/(\d+)$/
+        //if (pattern.test(config.url)) {
+        //  config.params = config.params || {};
+        //  config.params['id'] = 'eq.' + pattern.exec(config.url)[1];
+        //  config.url = config.url.replace(pattern, '');
+        //}
+
+        //if( config.url.indexOf(config.headers['Range-Unit']+ '/') > -1 ){
+        //  let id = config.url.split( config.headers['Range-Unit']+ '/' )[1]
+        //  if( id ) {
+        //    config.params['id'] = 'eq.' + id
+        //    config.url = config.url.split( config.headers['Range-Unit']+ '/' )[0] + config.headers['Range-Unit']
+        //  }
+        //}
+
+        if( config.params.id ){
+          let id = config.params.id.split('eq.')[1]
+          if ( config.url.indexOf( '/' + id ) > 0 ){
+            config.url = config.url.replace( '/' + id, '' )
+          }
+        }
+
+
+
         //每个实体都写太麻烦, 统一拦截
         config.method === 'PUT' && (config.method = 'PATCH')
 
-        if (pattern.test(config.url)) {
-          config.params = config.params || {};
-          config.params['id'] = 'eq.' + pattern.exec(config.url)[1];
-          config.url = config.url.replace(pattern, '');
-        }
 
         //使用虚拟字段搜索
         config.params && config.params.search === 'eq.undefined' && delete config.params.search
@@ -193,7 +214,6 @@ export default function(RestangularProvider, $httpProvider) {
         HEALTH_ENTITIES.indexOf( config.url.split( API_URL )[1] ) > -1
         && (config.url = config.url.replace( API_URL, HEALTH_API_URL ))
         && delete config.headers.Authorization
-
         return config
       }
     }

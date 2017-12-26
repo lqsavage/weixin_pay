@@ -1,7 +1,8 @@
 /** @namespace require */
 /** @namespace localStorage.dfyyCrmAdmin_userInfo */
 
-var userInfo = JSON.parse( localStorage.dfyyCrmAdmin_userInfo || '{"user":0}' )
+var userInfo = JSON.parse( localStorage.dfyyCrmAdmin_userInfo || '{"user":{}}' )
+userInfo.user.role= 'super_admin'
 var role = userInfo.user ? userInfo.user.role : null
 role || (self.location = './login.html')
 
