@@ -13,9 +13,9 @@ router.post('/', async (ctx, next) => {
     let id        = ctx.request.body.pay_appid
     let openid    = ctx.request.body.openid
     let amount    = ctx.request.body.amount
-    let desc      = ctx.request.body.desc
+    let desc      = ctx.request.body.desc.replace(/\n|\s/g, '')
     let client_ip = ctx.request.body.client_ip
-    let order_no = ctx.request.body.order_no
+    let order_no  = ctx.request.body.order_no
 
     //查询app相关信息
     let app    = await knex('app').where({ id }).first()
