@@ -35,6 +35,6 @@ export default function(nga){
   this.e.title = '应用'
   this.e.menuRole = ['followuper', 'super_admin', 'kf', 'doc', 'hos_admin', 'dept_admin']
   this.e.icon = 'fa-street-view'
-  this.e.listView().filters([...this.e.properties, nga.custom.searchField(nga) ])
+  this.e.listView().filters([...this.e.properties ])
   return this
 }

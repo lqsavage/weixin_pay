@@ -137,6 +137,7 @@ let keys = {
   dealer_dept_id          : '处理部门',
   complaint_type          : '投诉类型',
   succ                    : '成功',
+  succeeded               : '成功',
   failed                  : '失败',
   abort                   : '中止',
   consult                 : '咨询',

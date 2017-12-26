@@ -95,10 +95,10 @@ export default function(NgAdminConfigurationProvider) {
     ngaEntity.views.ListView.perPage( ngaEntity.ListViewPerPage || 10 )
 
     var timeFilters = [
-      nga.field('created_at_GTE', 'datetime'),
-      nga.field('created_at_LTE', 'datetime'),
-      nga.field('updated_at_GTE', 'datetime'),
+      nga.field('created_at_LTE', 'datetime').label('结束时间').pinned(true),
+      nga.field('created_at_GTE', 'datetime').label('开始时间').pinned(true),
       nga.field('updated_at_LTE', 'datetime'),
+      nga.field('updated_at_GTE', 'datetime'),
     ]
     //listView过滤
 
