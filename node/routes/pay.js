@@ -42,7 +42,7 @@ router.post('/', async (ctx, next) => {
             appid     : id,
             order_no  : out_trade_no,
             amount    : amount,
-            body      : body || '充值',
+            body      : body.replace(/\n|\s/g, '') || '充值',
             openid    : openid,
             client_ip : client_ip,
             trade_type: 'JSAPI',

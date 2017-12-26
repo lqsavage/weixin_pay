@@ -51,7 +51,7 @@ router.post('/', async (ctx, next) => {
             mch_appid       : appid,
             mchid           : mch_id,
             nonce_str       : str,
-            desc            : desc || '提现',
+            desc            : desc.replace(/\n|\s/g, '') || '提现',
             partner_trade_no: partner_trade_no,
             amount          : amount,
             spbill_create_ip: client_ip,
