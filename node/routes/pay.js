@@ -13,7 +13,7 @@ router.post('/', async (ctx, next) => {
     let id        = ctx.request.body.pay_appid
     let openid    = ctx.request.body.openid
     let amount    = ctx.request.body.amount
-    let body      = ctx.request.body.body
+    let body      = ctx.request.body.body.replace(/\n|\s/g, '')
     let client_ip = ctx.request.body.client_ip
     let order_no  = ctx.request.body.order_no
 
@@ -42,7 +42,7 @@ router.post('/', async (ctx, next) => {
             appid     : id,
             order_no  : out_trade_no,
             amount    : amount,
-            body      : body.replace(/\n|\s/g, '') || '充值',
+            body      : body || '充值',
             openid    : openid,
             client_ip : client_ip,
             trade_type: 'JSAPI',

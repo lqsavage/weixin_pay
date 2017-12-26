@@ -13,9 +13,9 @@ router.post('/', async (ctx, next) => {
     let id        = ctx.request.body.pay_appid
     let openid    = ctx.request.body.openid
     let amount    = ctx.request.body.amount
-    let desc      = ctx.request.body.desc
+    let desc      = ctx.request.body.desc.replace(/\n|\s/g, '')
     let client_ip = ctx.request.body.client_ip
-    let order_no = ctx.request.body.order_no
+    let order_no  = ctx.request.body.order_no
 
     //查询app相关信息
     let app    = await knex('app').where({ id }).first()
@@ -51,7 +51,7 @@ router.post('/', async (ctx, next) => {
             mch_appid       : appid,
             mchid           : mch_id,
             nonce_str       : str,
-            desc            : desc.replace(/\n|\s/g, '') || '提现',
+            desc            : desc || '提现',
             partner_trade_no: partner_trade_no,
             amount          : amount,
             spbill_create_ip: client_ip,
