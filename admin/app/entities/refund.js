@@ -9,7 +9,10 @@ export default function(nga){
   var description  = nga.field('description')
   var status       = nga.field('status')
   var failure_msg  = nga.field('failure_msg')
-  var appid        = nga.field('appid')
+  var appid           = nga.field('appid', 'reference')
+    .targetEntity(nga.entity('app'))
+    .targetField(nga.field('name'))
+    .label('应用')
   var succeeded_at = nga.field('succeeded_at')
   var created_at   = nga.field('created_at', 'datetime')
   var updated_at   = nga.field('updated_at', 'datetime')
@@ -22,19 +25,18 @@ export default function(nga){
         <tr><td>{{ 'description'  | dictionary }}</td><td>{{ entry.values.description  | dictionary}}</td></tr>
         <tr><td>{{ 'status'       | dictionary }}</td><td>{{ entry.values.status       | dictionary}}</td></tr>
         <tr><td>{{ 'failure_msg'  | dictionary }}</td><td>{{ entry.values.failure_msg  | dictionary}}</td></tr>
-        <tr><td>{{ 'appid'        | dictionary }}</td><td>{{ entry.values.appid        | dictionary}}</td></tr>
         <tr><td>{{ 'succeeded_at' | dictionary }}</td><td>{{ entry.values.succeeded_at | dateTime  }}</td></tr>
     </table>
 </div>
     `
   ).label(' ')
 
-  this.properties = [id, recharge_id, description, status, failure_msg, appid, succeeded_at, created_at, updated_at,]
-  this.e.listView().fields([id, tempFiled, created_at,])
-  this.e.showView().fields(this.properties)
+  this.e.properties = [id, recharge_id, description, status, failure_msg, appid, succeeded_at, created_at, updated_at,]
+  this.e.listView().fields([id, appid, tempFiled, created_at,])
+  this.e.showView().fields(this.e.properties)
   this.e.title = '退款'
   this.e.menuRole = ['followuper', 'super_admin', 'kf', 'doc', 'hos_admin', 'dept_admin']
   this.e.icon = 'fa-street-view'
-  this.e.listView().filters([...this.properties, nga.custom.searchField(nga) ])
+  this.e.listView().filters([...this.e.properties, nga.custom.searchField(nga) ])
   return this
 }

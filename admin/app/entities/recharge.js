@@ -29,9 +29,6 @@ export default function(nga){
         <tr><td>{{ 'amount'      | dictionary }}</td><td>{{ entry.values.amount      | dictionary}}</td></tr>
         <tr><td>{{ 'order_no'    | dictionary }}</td><td>{{ entry.values.order_no    | dictionary}}</td></tr>
         <tr><td>{{ '描述'         | dictionary }}</td><td>{{ entry.values.body        | dictionary}}</td></tr>
-        <tr><td>{{ 'openid'      | dictionary }}</td><td>{{ entry.values.openid      | dictionary}}</td></tr>
-        <tr><td>{{ 'client_ip'   | dictionary }}</td><td>{{ entry.values.client_ip   | dictionary}}</td></tr>
-        <tr><td>{{ 'trade_type'  | dictionary }}</td><td>{{ entry.values.trade_type  | dictionary}}</td></tr>
         <tr><td>{{ 'status'      | dictionary }}</td><td>{{ entry.values.status      | dictionary}}</td></tr>
         <tr><td>{{ 'failure_msg' | dictionary }}</td><td>{{ entry.values.failure_msg | dictionary}}</td></tr>
         <tr><td>{{ 'paid_at'     | dictionary }}</td><td>{{ entry.values.paid_at     | dateTime}}</td></tr>
@@ -41,12 +38,12 @@ export default function(nga){
   ).label(' ')
 
 
-  this.properties = [id, appid, order_no, amount, body, openid, client_ip, trade_type, amount_refunded, clientstatus_ip, failure_msg, paid_at, created_at, updated_at,]
+  this.e.properties = [id, appid, order_no, amount, body, openid, client_ip, trade_type, amount_refunded, clientstatus_ip, failure_msg, paid_at, created_at, updated_at,]
   this.e.listView().fields([id, appid, tempFiled, created_at])
-  this.e.showView().fields(this.properties)
+  this.e.showView().fields(this.e.properties)
   this.e.title = '支付'
   this.e.menuRole = ['followuper', 'super_admin', 'kf', 'doc', 'hos_admin', 'dept_admin']
   this.e.icon = 'fa-street-view'
-  this.e.listView().filters([...this.properties, nga.custom.searchField(nga) ])
+  this.e.listView().filters([...this.e.properties, nga.custom.searchField(nga) ])
   return this
 }

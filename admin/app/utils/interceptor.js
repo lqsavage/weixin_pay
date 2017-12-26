@@ -136,7 +136,7 @@ export default function(RestangularProvider, $httpProvider) {
         //  }
         //}
 
-        if( config.params.id ){
+        if( config.params && config.params.id ){
           let id = config.params.id.split('eq.')[1]
           if ( config.url.indexOf( '/' + id ) > 0 ){
             config.url = config.url.replace( '/' + id, '' )

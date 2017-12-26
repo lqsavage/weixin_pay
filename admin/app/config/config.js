@@ -132,7 +132,7 @@ export default function(NgAdminConfigurationProvider) {
       ngaEntity.views[viewName]._fields.forEach(i => nga.custom.fieldBatchTask(nga,i) )
 
     }
-
+    ngaEntity.properties.forEach( i => nga.custom.fieldBatchTask(nga,i) )
     //添加实体
     app.addEntity(ngaEntity)
     k = null
