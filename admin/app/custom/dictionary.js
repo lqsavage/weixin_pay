@@ -245,6 +245,7 @@ let keys = {
   failure_msg    : '失败提示',
   paid           : '已支付',
   pending        : '进行中',
+  total          : '总计',
 }
 
 let dictionary = function(s){

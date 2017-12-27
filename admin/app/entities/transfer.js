@@ -33,6 +33,19 @@ export default function(nga){
 
   this.e.properties = [id, appid, openid, amount, client_ip, description, status, failure_msg, created_at, updated_at,]
   this.e.listView().fields([appid, amount, status, created_at, ])
+  this.e.listView().prepare(['Restangular', 'datastore', 'entries', 'Entry', function(Restangular, datastore, entries, Entry) {
+    if( entries && entries.length && entries[0] ){
+      let count = 0
+      entries.forEach( i => i.values.amount && (count += i.values.amount) )
+      entries.push({
+        values: {
+          id          : 'count',
+          amount      : count,
+          status      : 'total'
+        }
+      })
+    }
+  }])
   this.e.showView().fields(this.e.properties)
   this.e.title = '企业付款'
   this.e.menuRole = ['followuper', 'super_admin', 'kf', 'doc', 'hos_admin', 'dept_admin']
