@@ -32,7 +32,7 @@ export default function(nga){
   this.e.properties = [wx_appid, mchid, name, cert_path, api_key, notify_url, created_at, updated_at]
   this.e.listView().fields([id, tempFiled, created_at])
   this.e.showView().fields(this.e.properties)
-  this.e.title = '应用'
+  this.e.title = '商户'
   this.e.menuRole = ['followuper', 'super_admin', 'kf', 'doc', 'hos_admin', 'dept_admin']
   this.e.icon = 'fa-street-view'
   this.e.listView().filters([...this.e.properties ])

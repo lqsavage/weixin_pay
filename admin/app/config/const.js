@@ -28,12 +28,12 @@ if(window.location.hostname === '10.1.201.201') {
   API_URL_GRAPHQL = `http://${window.location.hostname}/pay/graphql`
   HEALTH_API_URL = `http://${window.location.hostname}/health/`
 }
-if(window.location.hostname === '0.0.0.0') {
-  prod_api_url = `http://${window.location.hostname}/pay/rest/`
-  prod_api_hostname = window.location.hostname
-  API_URL_GRAPHQL = `http://${window.location.hostname}/pay/graphql`
-  HEALTH_API_URL = `http://${window.location.hostname}/health/`
-}
+// if(window.location.hostname === '0.0.0.0') {
+//   prod_api_url = `http://${window.location.hostname}/pay/rest/`
+//   prod_api_hostname = window.location.hostname
+//   API_URL_GRAPHQL = `http://${window.location.hostname}/pay/graphql`
+//   HEALTH_API_URL = `http://${window.location.hostname}/health/`
+// }
 let API_URL= prod_api_url
 
 

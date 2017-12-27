@@ -171,6 +171,7 @@ export default function(RestangularProvider, $httpProvider) {
             //  config.params[paramName] =
             //}
             config.params[paramName] = config.params[paramName].replace('+0800 (CST)', '')
+            if (config.params[paramName].indexOf('GMT+0800')) config.params[paramName] = config.params[paramName].split('GMT')[0]
           }
         }
 

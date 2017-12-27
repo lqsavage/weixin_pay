@@ -34,10 +34,9 @@ var choices    = {
     {value: '3', label: '对治疗效果不满意'},
     {value: '4', label: '有更好的就诊去处'},
   ],
-  frequent: [
-    {value: '7', label: '每周'},
-    {value: '15', label: '每半月'},
-    {value: '30', label: '每月'},
+  status: [
+    {value: 'paid', label: '已支付'},
+    { value: 'pending', label: '未支付'}
   ],
   consult_purpose: ['illness', 'book', 'operation', 'drug'],
   call_state: ['GRIF_CALL_OUT', 'GRIF_CALL_MISS', 'GRIF_CALL_IN'],

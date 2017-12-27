@@ -111,8 +111,7 @@ export default function(NgAdminConfigurationProvider) {
     }
 
     //listView listActions
-    ngaEntity.noListAction || !ngaEntity.views.ListView._listActions || ngaEntity.views.ListView._listActions.length === 0
-    && ngaEntity.listView().listActions(['show', 'edit', 'delete'])
+    ngaEntity.noListAction
 
     //覆盖CreateView提交数据成功函数
     ngaEntity.views.CreateView.onSubmitSuccess(['progression', 'notification', '$state', 'entry', 'entity', function(progression, notification, $state, entry, entity) {

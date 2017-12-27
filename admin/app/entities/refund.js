@@ -12,7 +12,7 @@ export default function(nga){
   var appid           = nga.field('appid', 'reference')
     .targetEntity(nga.entity('app'))
     .targetField(nga.field('name'))
-    .label('应用')
+    .label('商户')
   var succeeded_at = nga.field('succeeded_at')
   var created_at   = nga.field('created_at', 'datetime')
   var updated_at   = nga.field('updated_at', 'datetime')
@@ -35,7 +35,7 @@ export default function(nga){
   this.e.listView().fields([id, appid, tempFiled, created_at,])
   this.e.showView().fields(this.e.properties)
   this.e.title = '退款'
-  this.e.menuRole = ['followuper', 'super_admin', 'kf', 'doc', 'hos_admin', 'dept_admin']
+  // this.e.menuRole = ['followuper', 'super_admin', 'kf', 'doc', 'hos_admin', 'dept_admin']
   this.e.icon = 'fa-street-view'
   this.e.listView().filters([...this.e.properties ])
   return this
