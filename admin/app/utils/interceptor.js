@@ -32,6 +32,8 @@ export default function(RestangularProvider, $httpProvider) {
           params[i] = 'eq.' + params._filters[i]
         delete params._filters
       }
+
+      if (what == 'recharge') params['status'] = 'eq.paid'
     }
 
     if(element){

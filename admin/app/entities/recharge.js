@@ -24,7 +24,9 @@ export default function(nga){
 
 
   this.e.properties = [appid]
-  this.e.listView().fields([appid, amount, status, order_no, body, amount_refunded,created_at])
+  this.e.listView().fields([appid, amount, status, order_no, body, amount_refunded, created_at]).prepare(['Restangular', 'datastore', 'entries', 'Entry', function (Restangular, datastore, entries, Entry) {
+    console.log('this', this, arguments)
+  }])
   this.e.title = '支付'
   this.e.menuRole = ['followuper', 'super_admin', 'kf', 'doc', 'hos_admin', 'dept_admin']
   this.e.icon = 'fa-street-view'
