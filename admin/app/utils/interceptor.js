@@ -33,7 +33,7 @@ export default function(RestangularProvider, $httpProvider) {
         delete params._filters
       }
 
-      if (what == 'recharge') params['status'] = 'eq.paid'
+      if (what.match(/recharge|transfer/)) params['status'] = 'eq.paid'
     }
 
     if(element){

@@ -10,7 +10,7 @@ export default function(nga){
     .targetField(nga.field('name'))
     .label('商户')
   var openid      = nga.field('openid')
-  var amount = nga.field('amount').label('金额(元)').template(entry => `<span>-${entry.values.amount / 100}<span>`)
+  var amount = nga.field('amount').label('金额(元)').template(entry => `<span>-${entry.values.amount / 100}<\span>`)
   var client_ip   = nga.field('client_ip')
   var description = nga.field('description')
   var status = nga.field('status', 'choice').label('支付状态')
@@ -18,21 +18,14 @@ export default function(nga){
   var created_at  = nga.field('created_at', 'datetime')
   var updated_at  = nga.field('updated_at', 'datetime')
 
-  var tempFiled = nga.field('', 'template').template(
-    entry => `
-<div>
-    <table class="common-listView-tempFiled">
-        <tr><td>{{ 'amount'      | dictionary }}</td><td>{{ entry.values.amount      | dictionary }}</td></tr>
-        <tr><td>{{ 'description' | dictionary }}</td><td>{{ entry.values.description | dictionary }}</td></tr>
-        <tr><td>{{ 'status'      | dictionary }}</td><td>{{ entry.values.status      | dictionary }}</td></tr>
-        <tr><td>{{ 'failure_msg' | dictionary }}</td><td>{{ entry.values.failure_msg | dictionary }}</td></tr>
-    </table>
-</div>
-    `
-  ).label(' ')
-
   this.e.properties = [id, appid, openid, amount, client_ip, description, status, failure_msg, created_at, updated_at,]
   this.e.listView().fields([appid, amount, status, created_at, ])
+  this.e.exportView().fields([
+    appid,
+    nga.field('amount', 'template').label('金额(元)').template(entry => `-${entry.values.amount / 100}`),
+    status,
+    created_at
+  ])
   this.e.listView().prepare(['Restangular', 'datastore', 'entries', 'Entry', function(Restangular, datastore, entries, Entry) {
     if( entries && entries.length && entries[0] ){
       let count = 0

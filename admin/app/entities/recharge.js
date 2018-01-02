@@ -10,13 +10,16 @@ export default function(nga){
     .targetField(nga.field('name'))
     .label('商户')
   var order_no        = nga.field('order_no')
-  var amount = nga.field('amount', 'template').label('金额(元)').template(entry => `<span>${entry.values.amount/100}<span>` )
+  var amount = nga.field('amount', 'template').label('金额(元)').template(entry => `<span>${entry.values.amount/100}</span>` )
   var body            = nga.field('body').label('描述')
   var openid          = nga.field('openid')
   var client_ip       = nga.field('client_ip')
   var trade_type      = nga.field('trade_type')
   var amount_refunded = nga.field('amount_refunded').label('退款金额')
-  var status = nga.field('status', 'choice').label('支付状态')
+  var status = nga.field('status', 'choice').label('支付状态').choices([
+    { value: 'paid', label: '已支付' },
+    { value: 'pending', label: '未支付' }
+  ])
   var failure_msg     = nga.field('failure_msg')
   var paid_at         = nga.field('paid_at', 'datetime')
   var created_at      = nga.field('created_at', 'datetime')
@@ -24,9 +27,16 @@ export default function(nga){
 
 
   this.e.properties = [appid]
-  this.e.listView().fields([appid, amount, status, order_no, body, amount_refunded, created_at]).prepare(['Restangular', 'datastore', 'entries', 'Entry', function (Restangular, datastore, entries, Entry) {
-    console.log('this', this, arguments)
-  }])
+  this.e.listView().fields([appid, amount, status, order_no, body, amount_refunded, created_at])
+  this.e.exportView().fields([
+    appid,
+    nga.field('amount', 'template').label('金额(元)').template(entry => entry.values.amount / 100),
+    order_no,
+    body,
+    amount_refunded,
+    created_at
+  ])
+
   this.e.title = '支付'
   this.e.menuRole = ['followuper', 'super_admin', 'kf', 'doc', 'hos_admin', 'dept_admin']
   this.e.icon = 'fa-street-view'
